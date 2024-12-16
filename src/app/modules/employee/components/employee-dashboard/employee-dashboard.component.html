@@ -1,0 +1,64 @@
+
+<!-- <div class="clr-row">
+    <div class="clr-col-12">
+      <header>
+        <div class="branding">
+          <a href="javascript://" class="nav-link">
+            <cds-icon shape="vmw-app"></cds-icon>
+            <span class="title">VMW Emp App</span>
+          </a>
+        </div>
+      </header>
+    </div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-12">
+      <clr-tabs clrLayout="horizontal">
+        <clr-tab >
+          <button clrTabLink><cds-icon shape="grid-view"></cds-icon> Employee List</button>
+          <clr-tab-content>
+            <app-employee-list></app-employee-list>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink><cds-icon shape="users"></cds-icon> Org Chart</button>
+          <clr-tab-content>
+            <app-employee-org-chart [employeeList]="employeeList"></app-employee-org-chart>
+          </clr-tab-content>
+        </clr-tab>
+      </clr-tabs>
+    </div>
+</div> -->
+
+
+
+<div class="main-container">
+  <header class="header header-6">
+    <div class="branding">
+        <a href="javascript://" class="nav-link">
+          <cds-icon shape="vmw-app"></cds-icon>
+          <span class="title">VMW Emp App</span>
+        </a>
+    </div>
+  </header>
+  <div class="content-container">
+    
+    <div class="content-area" cds-layout="m-t:md">
+      <clr-tabs clrLayout="horizontal">
+        <clr-tab >
+          <button clrTabLink><cds-icon shape="grid-view"></cds-icon> Employee List</button>
+          <clr-tab-content>
+            <app-employee-list></app-employee-list>
+          </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+          <button clrTabLink><cds-icon shape="users"></cds-icon> Org Chart</button>
+          <clr-tab-content>
+            <app-employee-org-chart [employeeList]="employeeList"></app-employee-org-chart>
+          </clr-tab-content>
+        </clr-tab>
+      </clr-tabs>
+    </div>
+
+  </div>
+</div>

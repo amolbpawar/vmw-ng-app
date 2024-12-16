@@ -1,0 +1,49 @@
+
+<form clrForm [formGroup]="employeeForm" clrLayout="horizontal">
+  <clr-input-container>
+    <label>Manager Name</label>
+    <label>{{managerDetails?.firstName}} {{managerDetails?.lastName}}</label>
+  </clr-input-container>
+  <clr-input-container>
+      <label>First Name *</label>
+      <input clrInput formControlName="firstName" />
+      <clr-control-error *ngIf="employeeForm.controls.firstName.errors">First Name is required</clr-control-error>
+  </clr-input-container>
+  <clr-input-container>
+    <label>Last Name *</label>
+    <input clrInput formControlName="lastName" />
+    <clr-control-error *ngIf="employeeForm.controls.lastName.errors">Last Name  is required</clr-control-error>
+  </clr-input-container>
+  <clr-select-container>
+      <label>Designation</label>
+      <select clrSelect formControlName="designation">
+          <option value="">Select a Designation</option>
+          <option *ngFor="let option of designations" [value]="option">
+            {{ option }}
+          </option>
+      </select>
+      <clr-control-error *ngIf="employeeForm.controls.designation.errors">Designation is required</clr-control-error>
+  </clr-select-container>
+  <clr-input-container>
+    <label>Email ID</label>
+    <input clrInput type="email" formControlName="email" />
+    <clr-control-error *ngIf="employeeForm.controls.email.errors?.['required']">Email Id is required</clr-control-error>
+    <clr-control-error *ngIf="employeeForm.controls.email.errors?.['email']">Please enter valid email</clr-control-error>
+  </clr-input-container>
+  <clr-input-container>
+    <label>Phone Number</label>
+    <input clrInput type="text" formControlName="phone" />
+    <clr-control-error *ngIf="employeeForm.controls.phone.errors?.['required']">Phone Number is required</clr-control-error>
+    <clr-control-error *ngIf="employeeForm.controls.phone.errors?.['minlength']">Please enter min. 10 digit no</clr-control-error>
+  </clr-input-container>
+  <clr-input-container>
+    <label>Address</label>
+    <input clrInput type="text" formControlName="address" />
+    <clr-control-error *ngIf="employeeForm.controls.address.errors">Address is required</clr-control-error>
+  </clr-input-container>
+  <div class="clr-row clr-justify-content-end">
+  <button class="btn" type="button" (click)="resetForm()">Cancel</button>
+  <button class="btn btn-primary" type="submit" (click)="submit()" [disabled]="!employeeForm.valid">{{addEditButtonLabel}}</button>
+  </div>
+</form>
+

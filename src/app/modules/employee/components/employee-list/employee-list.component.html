@@ -1,0 +1,69 @@
+  <clr-datagrid  [(clrDgSelected)]="selected" id="employees-list" #datagridRef>
+    <clr-dg-column></clr-dg-column>
+    <clr-dg-column>Employee Name</clr-dg-column>
+    <clr-dg-column>Employee ID</clr-dg-column>
+    <clr-dg-column>Designation</clr-dg-column>
+    <clr-dg-column>Email</clr-dg-column>
+    <clr-dg-column>Phone</clr-dg-column>
+    <clr-dg-column>Manager</clr-dg-column>
+ 
+    <clr-dg-row *clrDgItems="let user of employeeList" [clrDgItem]="user" >
+        <clr-dg-cell> 
+          <clr-dropdown >
+            <cds-icon shape="ellipsis-vertical" class="nav-text" clrDropdownTrigger></cds-icon>
+           <clr-dropdown-menu *clrIfOpen clrPosition="auto">
+            <ul class="list-unstyled menu-content">
+              <li (click)="toggleModal('add', user)" > Add Reportee</li>
+              <li (click)="toggleModal('edit', user)" > Edit Employee Details</li>
+              <li (click)="toggleModal('delete', user)" > Delete Employee</li>
+              <li (click)="toggleModal('change-manager', user)" > Change Reporting Line</li>
+            </ul>
+           </clr-dropdown-menu>
+          </clr-dropdown>
+        </clr-dg-cell> 
+
+        <clr-dg-cell>{{ user.firstName }} {{ user.lastName }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.id }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.designation }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.email }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.phone }}</clr-dg-cell>
+        <clr-dg-cell>{{ user.managerName }}{{user.parentId? - user.parentId:''}}</clr-dg-cell>
+    </clr-dg-row>
+    
+    <clr-dg-footer>{{ ((employees$ | async)||[]).length }} users</clr-dg-footer>
+  </clr-datagrid> 
+
+  <clr-modal [(clrModalOpen)]="isAddReportee"  [clrModalSize]="'md'">
+    <h3 class="modal-title">Add New Reportee</h3>
+    <div class="modal-body">
+      
+    <app-employee-details *ngIf="isAddReportee" [managerDetails]="currentSelectedManager" [isEdit]="false" (closeParentModal)="closeModalFromChild($event)"></app-employee-details>
+    </div>
+  </clr-modal>
+
+    <clr-modal [(clrModalOpen)]="isEditEmployee"  [clrModalSize]="'md'">
+    <h3 class="modal-title">Edit Reportee</h3>
+    <div class="modal-body">
+    <app-employee-details *ngIf="isEditEmployee" [managerDetails]="currentSelectedManager" [isEdit]="true" (closeParentModal)="closeModalFromChild($event)"></app-employee-details>
+    </div>
+    </clr-modal>
+
+    <clr-modal [(clrModalOpen)]="isDeleteEmployee"  [clrModalSize]="'md'">
+    <h3 class="modal-title">Delete Reportee</h3>
+    <div class="modal-body">
+    <app-employee-delete [employeeDetails]="currentSelectedManager" (closeParentModal)="closeModalFromChild($event)"></app-employee-delete>
+    </div>
+    </clr-modal>
+
+    <clr-modal [(clrModalOpen)]="isChangeManager"  [clrModalSize]="'md'">
+    <h3 class="modal-title">Change Employee Reporting Line</h3>
+    <div class="modal-body">
+    <app-employee-line-manager [employeeDetails]="currentSelectedManager" (closeParentModal)="closeModalFromChild($event)"></app-employee-line-manager>
+    </div>
+    </clr-modal> 
+ 
+    <button *ngIf="!employeeList.length" (click)="addFirstEmp()">Add First Employee</button>
+ 
+
+    
+  
